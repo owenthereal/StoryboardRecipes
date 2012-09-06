@@ -57,4 +57,8 @@
     return recipe;
 }
 
+- (NSUInteger)indexOfRecipe:(PRPRecipe *)recipe {
+    return [self.recipes indexOfObject:recipe];
+}
+
 @end

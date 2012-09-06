@@ -134,8 +134,16 @@
         UIViewController *topVC = [[segue destinationViewController]
                                    topViewController];
         PRPRecipeEditorViewController *editor = (PRPRecipeEditorViewController *)topVC;
+        editor.recipeListVC = self;
         editor.recipe = recipe;
     }
+}
+
+- (void)finishedEditingRecipe:(PRPRecipe *)recipe {
+    NSUInteger row = [self.dataSource indexOfRecipe:recipe];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:path]
+                          withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 

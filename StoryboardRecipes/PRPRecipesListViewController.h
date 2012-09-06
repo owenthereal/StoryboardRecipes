@@ -13,4 +13,6 @@
 
 @property(nonatomic, strong) id <PRPRecipesListDataSource> dataSource;
 
+- (void)finishedEditingRecipe:(PRPRecipe *)recipe;
+
 @end

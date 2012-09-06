@@ -23,13 +23,6 @@
 @synthesize prepTimeStepper;
 @synthesize formatter;
 
-- (IBAction)changePreparationTime:(UIStepper *)sender {
-    NSInteger value = (NSInteger)[sender value];
-    self.recipe.preparationTime = [NSNumber numberWithInteger:value];
-    self.prepTimeLabel.text =
-    [self.formatter stringFromNumber:self.recipe.preparationTime];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -72,6 +65,46 @@
     if(nil != self.recipe.image) {
         self.recipeImage.image = self.recipe.image;
     }
+}
+
+- (IBAction)changePreparationTime:(UIStepper *)sender {
+    NSInteger value = (NSInteger)[sender value];
+    self.recipe.preparationTime = [NSNumber numberWithInteger:value];
+    self.prepTimeLabel.text =
+    [self.formatter stringFromNumber:self.recipe.preparationTime];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.recipe.title = textField.text;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([@"editDirections" isEqualToString:segue.identifier]) {
+        [[segue destinationViewController] setRecipe:recipe];
+    }
+    
+    if([@"choosePhoto" isEqualToString:segue.identifier]) {
+        [[segue destinationViewController] setDelegate:self];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.recipe.image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)done:(UIBarButtonItem *)sender {
+    [self dismissModalViewControllerAnimated:YES];
+    [self.recipeListVC finishedEditingRecipe:self.recipe];
 }
 
 @end
