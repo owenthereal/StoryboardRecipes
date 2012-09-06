@@ -19,6 +19,7 @@
 		5A2D653E15F9103E00C3FB03 /* PRPRecipesSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2D653A15F9103E00C3FB03 /* PRPRecipesSource.m */; };
 		5A2D653F15F9103E00C3FB03 /* PRPRecipesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2D653C15F9103E00C3FB03 /* PRPRecipesListViewController.m */; };
 		5A2D654115F9104700C3FB03 /* IMG_1948.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A2D654015F9104700C3FB03 /* IMG_1948.jpg */; };
+		5A2D654815F94A9100C3FB03 /* PRPRecipeEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2D654715F94A9100C3FB03 /* PRPRecipeEditorViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		5A2D653B15F9103E00C3FB03 /* PRPRecipesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPRecipesListViewController.h; sourceTree = "<group>"; };
 		5A2D653C15F9103E00C3FB03 /* PRPRecipesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPRecipesListViewController.m; sourceTree = "<group>"; };
 		5A2D654015F9104700C3FB03 /* IMG_1948.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_1948.jpg; sourceTree = "<group>"; };
+		5A2D654615F94A9100C3FB03 /* PRPRecipeEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPRecipeEditorViewController.h; sourceTree = "<group>"; };
+		5A2D654715F94A9100C3FB03 /* PRPRecipeEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPRecipeEditorViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 				5A2D653A15F9103E00C3FB03 /* PRPRecipesSource.m */,
 				5A2D653B15F9103E00C3FB03 /* PRPRecipesListViewController.h */,
 				5A2D653C15F9103E00C3FB03 /* PRPRecipesListViewController.m */,
+				5A2D654615F94A9100C3FB03 /* PRPRecipeEditorViewController.h */,
+				5A2D654715F94A9100C3FB03 /* PRPRecipeEditorViewController.m */,
 				5A2D653315F90FEE00C3FB03 /* PRPViewController.h */,
 				5A2D653415F90FEE00C3FB03 /* PRPViewController.m */,
 				5A2D651F15F90D0000C3FB03 /* PRPAppDelegate.h */,
@@ -189,6 +194,7 @@
 				5A2D653D15F9103E00C3FB03 /* PRPRecipe.m in Sources */,
 				5A2D653E15F9103E00C3FB03 /* PRPRecipesSource.m in Sources */,
 				5A2D653F15F9103E00C3FB03 /* PRPRecipesListViewController.m in Sources */,
+				5A2D654815F94A9100C3FB03 /* PRPRecipeEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

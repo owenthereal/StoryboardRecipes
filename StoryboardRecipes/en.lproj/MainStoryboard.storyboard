@@ -53,10 +53,16 @@
                             <outlet property="delegate" destination="2" id="NQB-TD-lnq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recipes" id="ABN-X9-OUh"/>
+                    <navigationItem key="navigationItem" title="Recipes" id="ABN-X9-OUh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="B5t-6i-lzw">
+                            <connections>
+                                <segue destination="0Bz-VL-yaa" kind="modal" identifier="addNewRecipe" id="XNP-pi-8uH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="697" y="102"/>
+            <point key="canvasLocation" x="367" y="102"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="686-az-YbK">
@@ -96,6 +102,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ccy-Mn-CC6"/>
                     <connections>
                         <outlet property="directionsView" destination="HGC-iZ-yII" id="TtV-Yf-r5d"/>
                         <outlet property="imageView" destination="YR6-Gz-iII" id="ZG7-bc-T0R"/>
@@ -123,22 +130,112 @@
             </objects>
             <point key="canvasLocation" x="-188" y="72"/>
         </scene>
+        <!--Recipe Editor View Controller - Edit Recipe-->
+        <scene sceneID="tGL-0z-Pfh">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SM3-PT-qWw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="S4j-y6-BSY" customClass="PRPRecipeEditorViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="730-CN-AUZ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" id="GZK-Zc-NK5">
+                                <rect key="frame" x="20" y="20" width="287" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Prep Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="iWd-Rv-1GN">
+                                <rect key="frame" x="23" y="127" width="84" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="Tcg-t8-hG4">
+                                <rect key="frame" x="206" y="124" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="changePreparationTime:" destination="S4j-y6-BSY" eventType="valueChanged" id="CSe-uR-k31"/>
+                                </connections>
+                            </stepper>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="LBU-eq-IZe">
+                                <rect key="frame" x="23" y="59" width="287" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ida-cC-RhH">
+                                <rect key="frame" x="114" y="127" width="93" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="V96-vA-BFO">
+                                <rect key="frame" x="41" y="159" width="250" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Recipe" id="VkJ-g4-4pG"/>
+                    <connections>
+                        <outlet property="directionsText" destination="LBU-eq-IZe" id="9Uc-Ky-zpe"/>
+                        <outlet property="prepTimeLabel" destination="ida-cC-RhH" id="JT3-53-rin"/>
+                        <outlet property="prepTimeStepper" destination="Tcg-t8-hG4" id="jRQ-HC-rID"/>
+                        <outlet property="recipeImage" destination="V96-vA-BFO" id="a1f-oO-ZfW"/>
+                        <outlet property="titleField" destination="GZK-Zc-NK5" id="W6f-TZ-8JV"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1470" y="682"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cVV-nU-JW0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wiz-ea-zAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="0Bz-VL-yaa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zxe-6F-sCn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="S4j-y6-BSY" kind="relationship" relationship="rootViewController" id="94h-Qm-gFx"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="991" y="682"/>
+        </scene>
     </scenes>
     <resources>
         <image name="IMG_1948.jpg" width="280" height="280"/>
     </resources>
     <classes>
+        <class className="PRPRecipeEditorViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PRPRecipeEditorViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="changePreparationTime:" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="directionsText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="prepTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="prepTimeStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="recipeImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="PRPRecipesListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PRPRecipesListViewController.h"/>
         </class>
         <class className="PRPViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PRPViewController.h"/>
             <relationships>
-                <relationship kind="action" name="dismiss:"/>
                 <relationship kind="outlet" name="directionsView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="prepTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="recipeTitle" candidateClass="UILabel"/>
             </relationships>
         </class>
     </classes>

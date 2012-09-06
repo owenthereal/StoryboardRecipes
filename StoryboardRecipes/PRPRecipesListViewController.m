@@ -9,6 +9,7 @@
 #import "PRPRecipesListViewController.h"
 #import "PRPRecipe.h"
 #import "PRPViewController.h"
+#import "PRPRecipeEditorViewController.h"
 
 @interface PRPRecipesListViewController ()
 
@@ -126,6 +127,14 @@
         NSIndexPath *index = [self.tableView indexPathForCell:sender];
         PRPRecipe *recipe = [self.dataSource recipeAtIndex:index.row];
         [[segue destinationViewController] setRecipe:recipe];
+    }
+    
+    if([@"addNewRecipe" isEqualToString:segue.identifier]) {
+        PRPRecipe *recipe = [self.dataSource createNewRecipe];
+        UIViewController *topVC = [[segue destinationViewController]
+                                   topViewController];
+        PRPRecipeEditorViewController *editor = (PRPRecipeEditorViewController *)topVC;
+        editor.recipe = recipe;
     }
 }
 

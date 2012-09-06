@@ -51,4 +51,10 @@
     return recipes;
 }
 
+- (PRPRecipe *)createNewRecipe {
+    PRPRecipe *recipe = [[PRPRecipe alloc] init];
+    [self.recipes addObject:recipe];
+    return recipe;
+}
+
 @end
