@@ -14,7 +14,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    PRPRecipesListViewController *controller = (PRPRecipesListViewController *)self.window.rootViewController;
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    PRPRecipesListViewController *controller = (PRPRecipesListViewController *)navigationController.topViewController;
     controller.dataSource = [[PRPRecipesSource alloc] init];
     return YES;
 }

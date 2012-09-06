@@ -11,13 +11,11 @@
 
 @interface PRPViewController : UIViewController
 
-@property(nonatomic, strong) PRPRecipe *recipe;
-@property(nonatomic, strong) IBOutlet UILabel *recipeTitle;
 @property(nonatomic, strong) IBOutlet UITextView *directionsView;
 @property(nonatomic, strong) IBOutlet UIImageView *imageView;
 @property(nonatomic, strong) IBOutlet UILabel *prepTime;
 @property(nonatomic, strong) NSNumberFormatter *formatter;
 
-- (IBAction)dismiss:(id)sender;
+@property(nonatomic, strong) PRPRecipe *recipe;
 
 @end
