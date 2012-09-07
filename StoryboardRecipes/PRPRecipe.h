@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PRPRecipe : NSObject
+@interface PRPRecipe : NSObject <NSCoding>
 
 @property(nonatomic, copy) NSString *title;
 @property(nonatomic, copy) NSString *directions;

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PRPDirectionsEditorDelegate.h"
 
 @class PRPRecipe;
 
 @interface PRPDirectionsEditorViewController : UIViewController <UITextViewDelegate>
 
-@property(nonatomic, strong) PRPRecipe *recipe;
-@property(nonatomic, strong) IBOutlet UITextView *textView;
+@property(nonatomic, copy) NSString *text;
+@property(nonatomic, weak) id<PRPDirectionsEditorDelegate> delegate;
 
 @end

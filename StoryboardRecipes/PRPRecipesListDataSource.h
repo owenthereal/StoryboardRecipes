@@ -16,6 +16,7 @@
 - (PRPRecipe *)recipeAtIndex:(NSInteger)index;
 - (void)deleteRecipeAtIndex:(NSInteger)index;
 - (PRPRecipe *)createNewRecipe;
+- (void)recipesChanged;
 - (NSUInteger)indexOfRecipe:(PRPRecipe *)recipe;
 
 @end

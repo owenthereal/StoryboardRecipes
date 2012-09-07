@@ -8,7 +8,7 @@
 
 #import "PRPAppDelegate.h"
 #import "PRPRecipesListViewController.h"
-#import "PRPRecipesSource.h"
+#import "PRPRecipesDocument.h"
 
 @implementation PRPAppDelegate
 
@@ -16,7 +16,20 @@
 {
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     PRPRecipesListViewController *controller = (PRPRecipesListViewController *)navigationController.topViewController;
-    controller.dataSource = [[PRPRecipesSource alloc] init];
+    NSURL *docDir = [[[NSFileManager defaultManager]
+                      URLsForDirectory:NSDocumentDirectory
+                      inDomains:NSUserDomainMask] lastObject];
+    NSURL *docURL = [docDir URLByAppendingPathComponent:@"Recipes.recipes"];
+    PRPRecipesDocument *doc = [[PRPRecipesDocument alloc] initWithFileURL:docURL];  
+    controller.dataSource = doc;
+    [doc openWithCompletionHandler:^(BOOL success) {
+        if(success) {
+            [controller.tableView reloadData];
+        } else {
+            NSLog(@"Failed to open document");
+        }
+        
+    }];
     return YES;
 }
 							

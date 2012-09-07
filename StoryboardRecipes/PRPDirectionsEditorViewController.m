@@ -11,11 +11,14 @@
 
 @interface PRPDirectionsEditorViewController ()
 
+@property(nonatomic, strong) IBOutlet UITextView *textView;
+
 @end
 
 @implementation PRPDirectionsEditorViewController
 
-@synthesize recipe;
+@synthesize delegate;
+@synthesize text;
 @synthesize textView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,7 +39,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    self.text = nil;
+    self.textView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -45,14 +49,14 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    self.recipe.directions = self.textView.text;
+    [self.delegate directionsEditor:self finishedEditingText:self.textView.text];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.title = @"Edit Directions";
     [self.textView becomeFirstResponder];
-    self.textView.text = self.recipe.directions;
+    self.textView.text = self.text;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

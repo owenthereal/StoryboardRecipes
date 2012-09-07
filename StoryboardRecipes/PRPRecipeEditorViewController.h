@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PRPRecipesListViewController.h"
+#import "PRPRecipeEditorDelegate.h"
+#import "PRPDirectionsEditorDelegate.h"
 
 @class PRPRecipe;
 
-@interface PRPRecipeEditorViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate>
+@interface PRPRecipeEditorViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate,                                      PRPDirectionsEditorDelegate>
 
 @property(nonatomic, strong) PRPRecipe *recipe;
 
@@ -22,7 +23,7 @@
 @property(nonatomic, strong) IBOutlet UIImageView *recipeImage;
 @property(nonatomic, strong) IBOutlet UIStepper *prepTimeStepper;
 
-@property(nonatomic, weak) PRPRecipesListViewController *recipeListVC;
+@property(nonatomic, weak) id<PRPRecipeEditorDelegate> delegate;
 
 - (IBAction)done:(UIBarButtonItem *)sender;
 - (IBAction)changePreparationTime:(UIStepper *)sender;

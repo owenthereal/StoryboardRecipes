@@ -15,11 +15,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="aTr-7Y-MVU" detailTextLabel="0Gf-9N-tg0" imageView="qh4-19-La7" style="IBUITableViewCellStyleSubtitle" id="6qu-Sm-cgX">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="aTr-7Y-MVU" detailTextLabel="0Gf-9N-tg0" imageView="qh4-19-La7" style="IBUITableViewCellStyleSubtitle" id="6qu-Sm-cgX">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aTr-7Y-MVU">
@@ -60,6 +60,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Lvm-6a-HaT" kind="modal" identifier="editExistingRecipe" id="SsO-Ju-WRy"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="367" y="102"/>
@@ -70,7 +73,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZsF-QY-H0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Lvm-6a-HaT" customClass="PRPViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z1r-SZ-Rc7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="HGC-iZ-yII">
@@ -324,4 +327,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="SsO-Ju-WRy"/>
+    </inferredMetricsTieBreakers>
 </document>

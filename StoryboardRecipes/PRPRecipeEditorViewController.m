@@ -72,6 +72,7 @@
     self.recipe.preparationTime = [NSNumber numberWithInteger:value];
     self.prepTimeLabel.text =
     [self.formatter stringFromNumber:self.recipe.preparationTime];
+    [self.delegate recipeChanged:self.recipe];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -80,11 +81,13 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.recipe.title = textField.text;
+    [self.delegate recipeChanged:self.recipe];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([@"editDirections" isEqualToString:segue.identifier]) {
-        [[segue destinationViewController] setRecipe:recipe];
+        [[segue destinationViewController] setText:self.recipe.directions];
+        [[segue destinationViewController] setDelegate:self];
     }
     
     if([@"choosePhoto" isEqualToString:segue.identifier]) {
@@ -96,6 +99,7 @@
         didFinishPickingMediaWithInfo:(NSDictionary *)info {
     self.recipe.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     [picker dismissModalViewControllerAnimated:YES];
+    [self.delegate recipeChanged:self.recipe];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -104,7 +108,13 @@
 
 - (IBAction)done:(UIBarButtonItem *)sender {
     [self dismissModalViewControllerAnimated:YES];
-    [self.recipeListVC finishedEditingRecipe:self.recipe];
+    [self.delegate finishedEditingRecipe:self.recipe];
+}
+
+- (void)directionsEditor:(PRPDirectionsEditorViewController *)editor
+     finishedEditingText:(NSString *)text {
+    self.recipe.directions = text;
+    [self.delegate recipeChanged:self.recipe];
 }
 
 @end

@@ -134,7 +134,16 @@
         UIViewController *topVC = [[segue destinationViewController]
                                    topViewController];
         PRPRecipeEditorViewController *editor = (PRPRecipeEditorViewController *)topVC;
-        editor.recipeListVC = self;
+        editor.delegate = self;
+        editor.recipe = recipe;
+    }
+    
+    if([@"editExistingRecipe" isEqualToString:segue.identifier]) {
+        NSIndexPath *index = [self.tableView indexPathForCell:sender];
+        PRPRecipe *recipe = [self.dataSource recipeAtIndex:index.row];
+        UINavigationController *nav = [segue destinationViewController];
+        PRPRecipeEditorViewController *editor = (PRPRecipeEditorViewController *)[nav topViewController];
+        editor.delegate = self;
         editor.recipe = recipe;
     }
 }
@@ -142,8 +151,33 @@
 - (void)finishedEditingRecipe:(PRPRecipe *)recipe {
     NSUInteger row = [self.dataSource indexOfRecipe:recipe];
     NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:path]
-                          withRowAnimation:UITableViewRowAnimationLeft];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    if(nil == cell) {
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:path]
+                              withRowAnimation:UITableViewRowAnimationLeft];
+    } else {
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:path]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
+    [self.dataSource recipesChanged];
+}
+
+-(void)recipeChanged:(PRPRecipe *)recipe {
+    [self.dataSource recipesChanged];
+    NSUInteger row = [self.dataSource indexOfRecipe:recipe];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+    if(nil != cell) {
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:path]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"editExistingRecipe"
+                              sender:cell];
 }
 
 
