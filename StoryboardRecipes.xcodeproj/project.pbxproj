@@ -22,6 +22,7 @@
 		5A2D654B15F951F500C3FB03 /* PRPDirectionsEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2D654A15F951F500C3FB03 /* PRPDirectionsEditorViewController.m */; };
 		5A2D654D15F9613800C3FB03 /* TapToChoose.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A2D654C15F9613800C3FB03 /* TapToChoose.png */; };
 		5A2D655015F96A6900C3FB03 /* PRPRecipesDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2D654F15F96A6900C3FB03 /* PRPRecipesDocument.m */; };
+		5A90D06815FA6DEF00639010 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A90D06715FA6DEF00639010 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		5A2D654C15F9613800C3FB03 /* TapToChoose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TapToChoose.png; sourceTree = "<group>"; };
 		5A2D654E15F96A6800C3FB03 /* PRPRecipesDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPRecipesDocument.h; sourceTree = "<group>"; };
 		5A2D654F15F96A6900C3FB03 /* PRPRecipesDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPRecipesDocument.m; sourceTree = "<group>"; };
+		5A90D06715FA6DEF00639010 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A90D06815FA6DEF00639010 /* MessageUI.framework in Frameworks */,
 				5A2D651115F90D0000C3FB03 /* UIKit.framework in Frameworks */,
 				5A2D651315F90D0000C3FB03 /* Foundation.framework in Frameworks */,
 				5A2D651515F90D0000C3FB03 /* CoreGraphics.framework in Frameworks */,
@@ -72,6 +75,7 @@
 		5A2D650115F90CFF00C3FB03 = {
 			isa = PBXGroup;
 			children = (
+				5A90D06715FA6DEF00639010 /* MessageUI.framework */,
 				5A2D651615F90D0000C3FB03 /* StoryboardRecipes */,
 				5A2D650F15F90D0000C3FB03 /* Frameworks */,
 				5A2D650D15F90D0000C3FB03 /* Products */,

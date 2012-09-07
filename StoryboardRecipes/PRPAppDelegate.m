@@ -10,7 +10,16 @@
 #import "PRPRecipesListViewController.h"
 #import "PRPRecipesDocument.h"
 
+@interface PRPAppDelegate()
+
+@property (strong, nonatomic) PRPRecipesDocument *document;
+
+@end
+
 @implementation PRPAppDelegate
+
+@synthesize window;
+@synthesize document;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -30,6 +39,7 @@
         }
         
     }];
+    self.document = doc;
     return YES;
 }
 							
@@ -58,6 +68,20 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    PRPRecipesDocument *newDoc = [[PRPRecipesDocument alloc] initWithFileURL:url];
+    [newDoc openWithCompletionHandler:^(BOOL success) {
+        if(success) {
+            [self.document addRecipesFromDocument:newDoc];
+        } else {
+            NSLog(@"Failed to open new document - %@", url);
+        } }];
+    return YES;
 }
 
 @end

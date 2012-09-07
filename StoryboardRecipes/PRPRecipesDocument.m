@@ -9,6 +9,8 @@
 #import "PRPRecipesDocument.h"
 #import "PRPRecipe.h"
 
+NSString * const PRPRecipesDidChangeNotification = @"PRPRecipesDidChangeNotification";
+
 @implementation PRPRecipesDocument
 
 - (id)initWithFileURL:(NSURL *)url {
@@ -78,6 +80,27 @@ userInteractionPermitted:(BOOL)userInteractionPermitted {
         [super handleError:error
   userInteractionPermitted:userInteractionPermitted];
     }
+}
+
+- (NSData *)dataForRecipes:(NSError **)error {
+    __block NSData *data = nil;
+    NSFileCoordinator *coordinator = [[NSFileCoordinator alloc]
+                                      initWithFilePresenter:nil];
+    [coordinator coordinateReadingItemAtURL:[self fileURL]
+                                    options:NSFileCoordinatorReadingWithoutChanges
+                                      error:error
+                                 byAccessor:^(NSURL *newURL) {
+                                     data = [NSData dataWithContentsOfURL:newURL];
+                                 }];
+    return data;
+}
+
+- (void)addRecipesFromDocument:(PRPRecipesDocument *)newDoc {
+    [self.recipes addObjectsFromArray:[newDoc recipes]];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:PRPRecipesDidChangeNotification
+     object:self];
+    [self updateChangeCount:UIDocumentChangeDone];
 }
 
 @end

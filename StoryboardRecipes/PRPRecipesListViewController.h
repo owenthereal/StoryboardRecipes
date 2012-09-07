@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "PRPRecipesListDataSource.h"
 #import "PRPRecipeEditorDelegate.h"
 
-@interface PRPRecipesListViewController : UITableViewController <PRPRecipeEditorDelegate>
+@interface PRPRecipesListViewController : UITableViewController <PRPRecipeEditorDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property(nonatomic, strong) id <PRPRecipesListDataSource> dataSource;
 
 - (void)finishedEditingRecipe:(PRPRecipe *)recipe;
-
+- (IBAction)sendEmail:(UIBarButtonItem *)sender;
 @end

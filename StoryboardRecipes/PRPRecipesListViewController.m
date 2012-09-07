@@ -31,10 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -72,26 +72,26 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     }
-
+    
     PRPRecipe *recipe = [self.dataSource recipeAtIndex:indexPath.row];
     
     cell.textLabel.text = [recipe title];
     cell.imageView.image = [recipe image];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
-                                [recipe preparationTime],
+                                 [recipe preparationTime],
                                  NSLocalizedString(@"minutes", nil)];
     
     return cell;
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,27 +100,27 @@
         // Delete the row from the data source
         [self.dataSource deleteRecipeAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([@"presentRecipeDetail" isEqualToString:segue.identifier]) {
@@ -180,5 +180,45 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
                               sender:cell];
 }
 
+- (IBAction)sendEmail:(id)sender {
+    MFMailComposeViewController *mailVC =
+    [[MFMailComposeViewController alloc] init];
+    mailVC.delegate = self;
+    [mailVC setSubject:@"Great Recipes"];
+    NSError *error = nil;
+    [mailVC addAttachmentData:[self.dataSource dataForRecipes:&error]
+                     mimeType:@"application/octet-stream"
+                     fileName:@"Recipes.recipes"];
+    if(nil == error) {
+        mailVC.mailComposeDelegate = self;
+        [self presentModalViewController:mailVC animated:YES];
+    } else {
+        NSLog(@"error in coordinating read %@ - %@", error, error.userInfo); }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error {
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(recipesChanged:)
+     name:PRPRecipesDidChangeNotification object:self.dataSource];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:PRPRecipesDidChangeNotification
+     object:self.dataSource];
+}
+
+- (void)recipesChanged:(id)sender {
+    [self.tableView reloadData];
+}
 
 @end
