@@ -76,7 +76,7 @@
     PRPRecipe *recipe = [self.dataSource recipeAtIndex:indexPath.row];
     
     cell.textLabel.text = [recipe title];
-    cell.imageView.image = [recipe image];
+    cell.imageView.image = [recipe thumbnailImage];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
                                  [recipe preparationTime],
                                  NSLocalizedString(@"minutes", nil)];

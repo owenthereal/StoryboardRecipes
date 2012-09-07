@@ -96,10 +96,46 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker
-        didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    self.recipe.image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [picker dismissModalViewControllerAnimated:YES];
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *originalImage =
+    [info valueForKey:UIImagePickerControllerOriginalImage];
+    
+    CGSize cellViewSize = CGSizeMake(43.0, 43.0);
+    CGRect cellViewRect = [self rectForImage:originalImage inSize:cellViewSize];
+    UIGraphicsBeginImageContext(cellViewSize);
+    [originalImage drawInRect:cellViewRect];
+    self.recipe.thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGSize detailImageSize = CGSizeMake(260.0, 260.0);
+    CGRect detailImageRect = [self rectForImage:originalImage inSize:detailImageSize];
+    UIGraphicsBeginImageContext(detailImageSize);
+    [originalImage drawInRect:detailImageRect];
+    self.recipe.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     [self.delegate recipeChanged:self.recipe];
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+-
+(CGRect)rectForImage:(UIImage *)image inSize:(CGSize)size {
+    CGRect imageRect = {{0.0, 0.0}, image.size};
+    CGFloat scale = 1.0;
+    if(CGRectGetWidth(imageRect) > CGRectGetHeight(imageRect)) {
+        scale = size.width / CGRectGetWidth(imageRect);
+    }
+    else{
+        scale = size.height / CGRectGetHeight(imageRect);
+    }
+    
+    CGRect rect = CGRectMake(0.0, 0.0,
+                             scale * CGRectGetWidth(imageRect),
+                             scale * CGRectGetHeight(imageRect));
+    rect.origin.x = (size.width - CGRectGetWidth(rect)) / 2.0;
+    rect.origin.y = (size.height - CGRectGetHeight(rect)) / 2.0;
+    
+    return rect;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

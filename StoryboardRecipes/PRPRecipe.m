@@ -14,6 +14,7 @@
 @synthesize directions;
 @synthesize preparationTime;
 @synthesize image;
+@synthesize thumbnailImage;
 
 
 - (id) init {
@@ -29,6 +30,7 @@
     [coder encodeObject:directions forKey:@"directions"];
     [coder encodeObject:preparationTime forKey:@"preparationTime"];
     [coder encodeObject:image forKey:@"image"];
+    [coder encodeObject:thumbnailImage forKey:@"thumbnailImage"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -38,6 +40,7 @@
         directions = [coder decodeObjectForKey:@"directions"];
         preparationTime = [coder decodeObjectForKey:@"preparationTime"];
         image = [coder decodeObjectForKey:@"image"];
+        thumbnailImage = [coder decodeObjectForKey:@"thumbnailImage"];
     }
     return self;
 }
