@@ -118,6 +118,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissModalViewControllerAnimated:YES];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
 -
 (CGRect)rectForImage:(UIImage *)image inSize:(CGSize)size {
     CGRect imageRect = {{0.0, 0.0}, image.size};
@@ -136,10 +140,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     rect.origin.y = (size.height - CGRectGetHeight(rect)) / 2.0;
     
     return rect;
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)done:(UIBarButtonItem *)sender {

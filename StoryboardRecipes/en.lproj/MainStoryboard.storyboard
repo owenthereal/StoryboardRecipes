@@ -103,7 +103,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="YR6-Gz-iII">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="YR6-Gz-iII">
                                 <rect key="frame" x="30" y="180" width="260" height="260"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -248,7 +248,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxC-Xs-b6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="KKd-Qk-etR" customClass="PRPDirectionsEditorViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aXz-YN-xPR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="35q-eX-DsS">
